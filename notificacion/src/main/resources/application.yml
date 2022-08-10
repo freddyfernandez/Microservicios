@@ -25,6 +25,7 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+    enabled: false
 rabbitmq:
   exchanges:
     internal: internal.exchange
