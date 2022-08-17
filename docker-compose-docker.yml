@@ -65,63 +65,63 @@ services:
 #    depends_on:
 #        - zipkin
 #        - eureka-server
-#  cliente:
-#    image: ffernacu/cliente:latest
-#    container_name: cliente
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    networks:
-#      - spring
-#      - postgres
-#    depends_on:
-#      - zipkin
-#      #- eureka-server
-#      - postgres
-#      - rabbitmq
-#      - config-server
-#  validarcliente:
-#    image: ffernacu/validarcliente:latest
-#    container_name: validarcliente
-#    ports:
-#      - "8081:8081"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    networks:
-#      - spring
-#      - postgres
-#    depends_on:
-#      - zipkin
-#      #- eureka-server
-#      - postgres
-#      - rabbitmq
-#      - config-server
-#  notificacion:
-#    image: ffernacu/notificacion:latest
-#    container_name: notificacion
-#    ports:
-#      - "8082:8082"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    networks:
-#      - spring
-#      - postgres
-#    depends_on:
-#      - zipkin
-#      #- eureka-server
-#      - postgres
-#      - rabbitmq
-#      - config-server
-#  config-server:
-#    image: ffernacu/config-server:latest
-#    container_name: config-server
-#    ports:
-#      - "8090:8090"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    networks:
-#      - spring
+  cliente:
+    image: ffernacu/cliente:latest
+    container_name: cliente
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      #- eureka-server
+      - postgres
+      - rabbitmq
+      - config-server
+  validarcliente:
+    image: ffernacu/validarcliente:latest
+    container_name: validarcliente
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      #- eureka-server
+      - postgres
+      - rabbitmq
+      - config-server
+  notificacion:
+    image: ffernacu/notificacion:latest
+    container_name: notificacion
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - postgres
+    depends_on:
+      - zipkin
+      #- eureka-server
+      - postgres
+      - rabbitmq
+      - config-server
+  config-server:
+    image: ffernacu/config-server:latest
+    container_name: config-server
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
 networks:
   postgres:
     driver: bridge

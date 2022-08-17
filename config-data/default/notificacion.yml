@@ -21,8 +21,8 @@ spring:
     addresses: localhost:5672
 eureka:
   client:
-    register-with-eureka: false
-    fetch-registry: false
+    register-with-eureka: true
+    fetch-registry: true
     enabled: false
 rabbitmq:
   exchanges:
