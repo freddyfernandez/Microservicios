@@ -12,6 +12,9 @@ public interface IClienteService {
 
     public Cliente registrarCliente(Cliente cliente);
 
+    public String validarCliente(Cliente cliente);
+    public void notificarCliente(Cliente cliente);
+
     public Cliente modificarCliente(Cliente cliente) ;
 
     public int eliminarCliente(Integer id) ;

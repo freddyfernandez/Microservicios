@@ -1,5 +1,6 @@
 package pe.com.nttdata.cliente.service.impl;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pe.com.nttdata.cliente.controller.NotificacionRequest;
@@ -41,12 +42,23 @@ public class ClienteServiceImpl implements IClienteService {
                 ClienteCheckResponse.class,
                 clienteResponse.getId()
         );*/
-        ClienteCheckResponse clienteCheckResponse = clienteCheckClient.validarCliente(clienteResponse.getId());
+        return clienteResponse;
+    }
+    @CircuitBreaker(name="validarclienteCB", fallbackMethod = "fallValidarclienteCB")
+    public String validarCliente(Cliente cliente) {
+
+        ClienteCheckResponse clienteCheckResponse = clienteCheckClient.validarCliente(cliente.getId());
 
         if (clienteCheckResponse.esEstafador()) {
             throw new IllegalStateException("Cliente es un estafador!!");
         }
+        return "OK";
+    }
 
+    public String fallValidarclienteCB(Cliente cliente,Exception e){
+        return "NO_OK";
+    }
+    public void notificarCliente(Cliente cliente) {
         NotificacionRequest notificacionRequest = new NotificacionRequest(
                 cliente.getId(),
                 cliente.getEmail(),
@@ -58,8 +70,6 @@ public class ClienteServiceImpl implements IClienteService {
                 "internal.exchange",
                 "internal.notification.routing-key"
         );
-
-        return clienteResponse;
     }
 
     public Cliente modificarCliente(Cliente cliente) {
